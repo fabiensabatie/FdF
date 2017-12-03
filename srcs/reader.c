@@ -16,22 +16,25 @@
 #include "../includes/fdf.h"
 #include <fcntl.h>
 
-void convert_map(char *line)
-{
-	char **tab;
-	tab = ft_strsplit(line, ' ');
-	
-}
-
 void get_map(char *filename)
 {
 	int fd;
 	char *line;
+	int **map = (int**)malloc(sizeof(int*) * 1000);
+	char **tab;
 
 	if (!(fd = open(filename, O_RDONLY)))
 		exit(1);
 	while (get_next_line(fd, &line))
 	{
-		convert_map(line);
+		tab = ft_strsplit(line, ' ');
+		*map = (int*)malloc(sizeof(int) * 1000);
+		while (*tab)
+		{
+			**map = ft_atoi(*tab);
+			*map= *(map + 1);
+			tab++;
+		}
+		map++;
 	}
 }
