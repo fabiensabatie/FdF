@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fsabatie <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 15:24:37 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/01 15:24:38 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/08 12:09:58 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int main(int argc, char **argv)
 
 	if (argc != 2)
 		exit(1);
-	get_map(argv[1]);
-	mlx = new_mlx_infos(600, 600, "FDF FTW");
+	mlx = new_mlx_infos(WINX, WINY, ft_strjoin("FDF - ", argv[1]));
+
+	mlx->map = get_map(argv[1]);
+	draw_map(mlx, mlx->map);
+	mlx_do_key_autorepeaton(mlx->init);
+	mlx_key_hook(mlx->window, handle_events, mlx);
 	mlx_loop(mlx->init);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/06 21:06:58 by fsabatie          #+#    #+#              #
-#    Updated: 2017/11/24 16:58:16 by fsabatie         ###   ########.fr        #
+#    Updated: 2017/12/08 17:47:43 by fsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRC_NAME =	fdf.c \
 			drawers.c \
 			mlx.c \
 			dots.c \
-			reader.c
+			reader.c \
+			events.c
 
 LIB_NAME = libft.a
 OBJ_NAME = $(SRC_NAME:.c=.o)
@@ -39,6 +40,7 @@ ORANGE = \033[0;33m
 BLUE = \033[1;36m
 YELLOW = \033[1;33m
 PURPLE = \033[1;35m
+WHITE = \033[0;97m
 
 # Defining rules
 
@@ -52,7 +54,9 @@ $(NAME):
 	@gcc $(CPPFLAGS) -c $(SRC)
 	@gcc $(CPPFLAGS) $(OBJ_NAME) -o $(NAME) $(LIB) $(FLAGS)
 	@echo " ${GREEN}[OK]"
-
+	@echo "${WHITE}Oh my god, a wild ${RED}U${ORANGE}N${YELLOW}\
+	I${GREEN}C${BLUE}O${PURPLE}R${RED}N \
+	${WHITE}just pooped a FdF file !"
 clean:
 	@rm -rf $(OBJ_NAME)
 	@make clean -C $(LIB_PATH)
