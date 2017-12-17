@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/06 21:06:58 by fsabatie          #+#    #+#              #
-#    Updated: 2017/12/08 17:47:43 by fsabatie         ###   ########.fr        #
+#    Updated: 2017/12/17 14:03:03 by fsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,6 @@ INC_PATH = includes
 LIB_PATH = $(INC_PATH)/libft
 SRC_NAME =	fdf.c \
 			drawers.c \
-			mlx.c \
 			dots.c \
 			reader.c \
 			events.c

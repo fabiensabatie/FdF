@@ -6,11 +6,12 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 19:04:17 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/08 14:01:33 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/17 14:53:47 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include "../includes/libft/libft.h"
 #include <mlx.h>
 #include <stdlib.h>
 
@@ -31,7 +32,7 @@ int		get_color(int z)
 	int color = 0x00FFFFFF;
 	while (z--)
 		color -= 239000;
-	return (color);
+	return (ft_abs(color));
 }
 
 void	ft_swapdots(t_dot *a, t_dot *b)

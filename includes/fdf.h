@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 18:42:38 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/08 11:09:17 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/17 15:06:39 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ typedef struct	s_mlx_infos
 	t_map		*map;
 }				t_mlx_infos;
 
-t_mlx_infos	*new_mlx_infos(int win_x, int win_y, char *title);
 t_dot		*new_dot(int x, int y, int color);
-void		print_line(t_mlx_infos *mlx, t_dot *start, t_dot *end);
 void		ft_swapdots(t_dot *a, t_dot *b);
 void		ft_swapdotcoor(t_dot *dot);
 void		draw_map(t_mlx_infos *mlx, t_map *map);

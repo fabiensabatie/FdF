@@ -6,7 +6,7 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 14:51:42 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/10 15:51:51 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/17 14:52:30 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../includes/fdf.h"
 #include <fcntl.h>
 
-int	**init_map(char *filename, t_map *input)
+static int	**init_map(char *filename, t_map *input)
 {
 	int fd;
 	int ret;
@@ -26,8 +26,8 @@ int	**init_map(char *filename, t_map *input)
 	int **map;
 
 	ret = 0;
-	if (!(fd = open(filename, O_RDONLY)))
-		exit(1);
+	if ((fd = open(filename, O_RDONLY)) < 0)
+		ft_putnexit("Please make sure that the file exists.");
 	while (get_next_line(fd, &line))
 		ret++;
 	tab = ft_strsplit(line, ' ');
@@ -46,22 +46,7 @@ int	**init_map(char *filename, t_map *input)
 	return (map);
 }
 
-void	read_map(t_map *map)
-{
-	int i;
-	int j;
-
-	i = -1;
-	while (i++ < map->height - 1)
-	{
-		j = -1;
-		while (++j < map->width)
-			ft_putnbr(map->map[i][j]);
-		ft_putendl("");
-	}
-}
-
-void	convert_map(int fd, t_map *map)
+static void	convert_map(int fd, t_map *map)
 {
 	int i;
 	int j;
@@ -79,8 +64,12 @@ void	convert_map(int fd, t_map *map)
 			map->map[i][j] = ft_atoi(tab[j]);
 			j++;
 		}
+		if (j != map->width)
+			ft_putnexit("Invalid map");
 		i++;
 	}
+	if (i != map->height)
+		ft_putnexit("Invalid map");
 }
 
 t_map	*get_map(char *filename)
@@ -99,7 +88,7 @@ t_map	*get_map(char *filename)
 	map->tile_width = 2;
 	map->tile_height = 2;
 	map->offx = WINX / 2;
-	map->offy = 0;
+	map->offy = WINY / 2;
 	map->zplus = 2;
 	return (map);
 }
