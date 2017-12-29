@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/06 21:06:58 by fsabatie          #+#    #+#              #
-#    Updated: 2017/12/17 14:03:03 by fsabatie         ###   ########.fr        #
+#    Updated: 2017/12/22 14:12:12 by fsabatie         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = fdf
 
 SRC_PATH = srcs
 INC_PATH = includes
-LIB_PATH = $(INC_PATH)/libft
+LIB_PATH = libft
 SRC_NAME =	fdf.c \
 			drawers.c \
 			dots.c \
@@ -51,7 +51,7 @@ $(NAME):
 	@echo " ${GREEN}[OK]"
 	@echo "${GREEN}Compiling fdf." | tr -d '\n'
 	@gcc $(CPPFLAGS) -c $(SRC)
-	@gcc $(CPPFLAGS) $(OBJ_NAME) -o $(NAME) $(LIB) $(FLAGS)
+	@gcc $(CPPFLAGS) -g $(OBJ_NAME) -o $(NAME) $(LIB) $(FLAGS)
 	@echo " ${GREEN}[OK]"
 	@echo "${WHITE}Oh my god, a wild ${RED}U${ORANGE}N${YELLOW}\
 	I${GREEN}C${BLUE}O${PURPLE}R${RED}N \

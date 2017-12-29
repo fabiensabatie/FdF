@@ -6,12 +6,12 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 19:04:17 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/17 14:53:47 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/22 13:50:09 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include "../includes/libft/libft.h"
+#include "../libft/libft.h"
 #include <mlx.h>
 #include <stdlib.h>
 

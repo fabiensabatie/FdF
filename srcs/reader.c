@@ -6,42 +6,48 @@
 /*   By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 14:51:42 by fsabatie          #+#    #+#             */
-/*   Updated: 2017/12/17 14:52:30 by fsabatie         ###   ########.fr       */
+/*   Updated: 2017/12/25 13:29:28 by fsabatie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <mlx.h>
 #include <stdlib.h>
-#include "../includes/libft/libft.h"
+#include "../libft/libft.h"
 #include "../includes/fdf.h"
 #include <fcntl.h>
+#include <stdio.h>
 
 static int	**init_map(char *filename, t_map *input)
 {
 	int fd;
-	int ret;
+	int spaces;
 	char *line;
-	char **tab;
 	int **map;
+	char **tab;
 
-	ret = 0;
+	spaces = 0;
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		ft_putnexit("Please make sure that the file exists.");
-	while (get_next_line(fd, &line))
-		ret++;
-	tab = ft_strsplit(line, ' ');
+	while (get_next_line(fd, &line) && (input->height += 1))
+	{
+		input->width = 0;
+		tab = ft_strsplit(line, ' ');
+		while (tab[input->width])
+		{
+			free (tab[input->width]);
+			input->width++;
+		}
+		free (tab);
+		free (line);
+	}
 	close(fd);
-	fd = 0;
-	while (*tab++)
-		fd++;
-	input->height = ret;
-	input->width = fd;
-	if (!(map = (int**)malloc(sizeof(int*) * (ret + 1))))
+	fd = input->height;
+	if (!(map = (int**)malloc(sizeof(int*) * (fd + 1))))
 		exit(1);
-	map[ret] = NULL;
-	while (--ret >= 0)
-		if (!(map[ret] = (int*)malloc(sizeof(int) * (fd + 1))))
+	map[fd] = NULL;
+	while (--fd >= 0)
+		if (!(map[fd] = (int*)malloc(sizeof(int) * (input->width + 1))))
 			exit(1);
 	return (map);
 }
@@ -62,8 +68,10 @@ static void	convert_map(int fd, t_map *map)
 		while (tab[j])
 		{
 			map->map[i][j] = ft_atoi(tab[j]);
-			j++;
+			free (tab[j++]);
 		}
+		free (line);
+		free (tab);
 		if (j != map->width)
 			ft_putnexit("Invalid map");
 		i++;
@@ -85,8 +93,8 @@ t_map	*get_map(char *filename)
 		exit(1);
 	convert_map(fd, map);
 	close(fd);
-	map->tile_width = 2;
-	map->tile_height = 2;
+	map->tile_width = 10;
+	map->tile_height = 10;
 	map->offx = WINX / 2;
 	map->offy = WINY / 2;
 	map->zplus = 2;
