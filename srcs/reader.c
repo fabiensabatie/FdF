@@ -18,46 +18,41 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-static int	**init_map(char *filename, t_map *input)
+static int	**init_map(char *filename, t_map *i)
 {
-	int fd;
-	int spaces;
-	char *line;
-	int **map;
-	char **tab;
+	int		fd;
+	char	*line;
+	int		**map;
+	char	**tab;
 
-	spaces = 0;
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		ft_putnexit("Please make sure that the file exists.");
-	while (get_next_line(fd, &line) && (input->height += 1))
+	while (get_next_line(fd, &line) && (i->height += 1))
 	{
-		input->width = 0;
+		i->width = 0;
 		tab = ft_strsplit(line, ' ');
-		while (tab[input->width])
-		{
-			free (tab[input->width]);
-			input->width++;
-		}
-		free (tab);
-		free (line);
+		while (tab[i->width])
+			free(tab[i->width++]);
+		free(tab);
+		free(line);
 	}
 	close(fd);
-	fd = input->height;
+	fd = i->height;
 	if (!(map = (int**)malloc(sizeof(int*) * (fd + 1))))
 		exit(1);
 	map[fd] = NULL;
 	while (--fd >= 0)
-		if (!(map[fd] = (int*)malloc(sizeof(int) * (input->width + 1))))
+		if (!(map[fd] = (int*)malloc(sizeof(int) * (i->width + 1))))
 			exit(1);
 	return (map);
 }
 
 static void	convert_map(int fd, t_map *map)
 {
-	int i;
-	int j;
-	char **tab;
-	char *line;
+	int		i;
+	int		j;
+	char	**tab;
+	char	*line;
 
 	j = 0;
 	i = 0;
@@ -68,10 +63,10 @@ static void	convert_map(int fd, t_map *map)
 		while (tab[j])
 		{
 			map->map[i][j] = ft_atoi(tab[j]);
-			free (tab[j++]);
+			free(tab[j++]);
 		}
-		free (line);
-		free (tab);
+		free(line);
+		free(tab);
 		if (j != map->width)
 			ft_putnexit("Invalid map");
 		i++;
@@ -80,14 +75,16 @@ static void	convert_map(int fd, t_map *map)
 		ft_putnexit("Invalid map");
 }
 
-t_map	*get_map(char *filename)
+t_map		*get_map(char *filename)
 {
-	t_map *map;
-	int fd;
+	t_map	*map;
+	int		fd;
 
 	fd = 0;
 	if (!(map = (t_map*)malloc(sizeof(t_map))))
 		exit(1);
+	map->height = 0;
+	map->width = 0;
 	map->map = init_map(filename, map);
 	if (!(fd = open(filename, O_RDONLY)))
 		exit(1);
@@ -100,4 +97,3 @@ t_map	*get_map(char *filename)
 	map->zplus = 2;
 	return (map);
 }
-

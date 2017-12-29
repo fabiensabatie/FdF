@@ -35,7 +35,7 @@ int			check_line(char **content, char **copy, char **line)
 {
 	if (!(**copy) && !ft_strchr(*copy, '\n'))
 	{
-		free (*copy);
+		free(*copy);
 		return (0);
 	}
 	free(*content);

@@ -21,5 +21,5 @@ void	ft_putnexit(char const *s)
 {
 	ft_putstr((char *)s);
 	ft_putchar('\n');
-	exit (1);
+	exit(1);
 }

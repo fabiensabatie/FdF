@@ -29,7 +29,9 @@ t_dot	*new_dot(int x, int y, int color)
 
 int		get_color(int z)
 {
-	int color = 0x00FFFFFF;
+	int color;
+
+	color = 0x00FFFFFF;
 	while (z--)
 		color -= 239000;
 	return (ft_abs(color));

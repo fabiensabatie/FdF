@@ -26,19 +26,19 @@ static t_mlx_infos	*new_mlx_infos(int win_x, int win_y, char *title)
 	return (mlx);
 }
 
-int main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
-	t_mlx_infos *mlx;
-	char *title;
+	t_mlx_infos	*mlx;
+	char		*title;
 
 	if (argc != 2)
 		ft_putnexit("usage : ./fdf [map]");
-	title = ft_strjoin("FDF - ",  argv[1]);
+	title = ft_strjoin("FDF - ", argv[1]);
 	mlx = new_mlx_infos(WINX, WINY, title);
 	mlx->map = get_map(argv[1]);
 	draw_map(mlx, mlx->map);
 	mlx_key_hook(mlx->window, handle_events, mlx);
 	mlx_loop(mlx->init);
-	free (title);
+	free(title);
 	return (0);
 }
