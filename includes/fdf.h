@@ -33,6 +33,7 @@ typedef struct s_map
 	int			offx;
 	int			offy;
 	int			zplus;
+	int			q;
 }				t_map;
 
 typedef struct	s_mlx_infos
